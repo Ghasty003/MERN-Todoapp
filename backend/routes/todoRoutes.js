@@ -1,5 +1,10 @@
 const express = require("express");
-const { getTodos, createTodo } = require("../controllers/todoController");
+const {
+  getTodos,
+  createTodo,
+  deleteTodo,
+  updateTodo,
+} = require("../controllers/todoController");
 
 const router = express.Router();
 
@@ -7,12 +12,8 @@ router.get("/", getTodos);
 
 router.post("/", createTodo);
 
-router.delete("/:id", (req, res) => {
-  res.json({ message: "Delete request" });
-});
+router.delete("/:id", deleteTodo);
 
-router.patch("/:id", (req, res) => {
-  res.json({ message: "Patch request" });
-});
+router.patch("/:id", updateTodo);
 
 module.exports = router;
