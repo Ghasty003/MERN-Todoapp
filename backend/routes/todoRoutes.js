@@ -1,14 +1,11 @@
 const express = require("express");
+const { getTodos, createTodo } = require("../controllers/todoController");
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.json({ message: "Get request" });
-});
+router.get("/", getTodos);
 
-router.post("/", (req, res) => {
-  res.json({ message: "Post request" });
-});
+router.post("/", createTodo);
 
 router.delete("/:id", (req, res) => {
   res.json({ message: "Delete request" });
