@@ -18,6 +18,20 @@ const todoReducer = (state, action) => {
                 todos: state.todos.filter(t => t._id != action.payload._id)
             }
 
+        case "UPDATE_TODO":
+            const arr = state.todos.map(t => {
+                if (t._id == action.payload._id) {
+                    return {...t, todo: action.newTodo }
+                }
+
+                return t;
+            })
+
+            return {
+                todos: arr
+            }
+
+
         default:
             return state;
     }

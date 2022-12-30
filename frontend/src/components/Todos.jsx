@@ -67,10 +67,9 @@ function Todos({ todo:t }) {
 
         if (response.ok) {
             setEdit(false);
-            console.log(json);
+            dispatch({type: "UPDATE_TODO", payload: json, newTodo: todo});
         }
     }
-
     return (
         <div className='parent-todo'>
             { edit ? <form onSubmit={handleSubmit}>
