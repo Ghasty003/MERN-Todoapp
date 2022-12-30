@@ -6,14 +6,14 @@ function Todos({ todo }) {
     return (
         <div className='todo-container'>
             <div className='todos'>
-                Hello
+                <p>{ todo.todo }</p>
                 <div>
                     <AiFillEdit size={25} cursor="pointer" />
                     <AiFillDelete size={25} cursor="pointer" />
                     <MdOutlineDownloadDone size={25} cursor="pointer" />
                 </div>
             </div>
-            <span>Time</span>
+            <span>{todo.createdAt}</span>
         </div>
     );
 }

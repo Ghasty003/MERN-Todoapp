@@ -1,14 +1,43 @@
-import React from 'react';
+import React, { useContext, useRef, useState } from 'react';
+import TodosContext from '../context/TodosContext';
 
 function Input() {
 
-    const handleSubmit = (e) => {
+    const [todo, setTodo] = useState("");
+    const input = useRef("");
+
+    const {dispatch} = useContext(TodosContext);
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const response = await fetch("http://localhost:4000/api/todos", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({todo})
+        });
+
+        const json = await response.json();
+
+        if (!response.ok) {
+            console.log(json.error);
+        }
+
+        if (response.ok) {
+            dispatch({type: "CREATE_TODO", payload: json});
+            input.current.blur();
+            setTodo("");
+            console.log("New todo added", json)
+        }
     }
 
     return (
         <form className='input' onSubmit={handleSubmit}>
-            <input type="text" placeholder='Enter a task...' />
+            <input ref={input} type="text" placeholder='Enter a task...' value={todo} 
+                onChange={e => setTodo(e.target.value)} 
+            />
             <button>Go</button>
         </form>
     );
