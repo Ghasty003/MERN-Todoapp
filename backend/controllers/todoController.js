@@ -10,6 +10,26 @@ const getTodos = async (req, res) => {
   }
 };
 
+const getTodo = async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ error: "No such document" });
+  }
+
+  try {
+    const todo = await Todos.findById({ _id: id });
+
+    if (!todo) {
+      return res.status(404).json({ message: "No such document" });
+    }
+
+    res.status(200).json(todo);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
 const createTodo = async (req, res) => {
   const { todo } = req.body;
 
@@ -70,6 +90,7 @@ const updateTodo = async (req, res) => {
 
 module.exports = {
   getTodos,
+  getTodo,
   createTodo,
   deleteTodo,
   updateTodo,
