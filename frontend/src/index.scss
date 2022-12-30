@@ -57,7 +57,7 @@
             transition: all .5s;
 
             &:active {
-                transform: scale(.8);
+                transform: translate(-50%, -50%) scale(.5);
             }
         }
     }
