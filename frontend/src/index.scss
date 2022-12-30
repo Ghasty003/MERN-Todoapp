@@ -2,4 +2,20 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.App {
+    background: dodgerblue;
+    height: 100%;
+    min-height: 100vh;
+    color: white;
+}
+
+.home {
+    padding: 30px;
+
+    h2 {
+        text-align: center;
+    }
 }
