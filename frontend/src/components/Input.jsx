@@ -29,7 +29,6 @@ function Input() {
             dispatch({type: "CREATE_TODO", payload: json});
             input.current.blur();
             setTodo("");
-            console.log("New todo added", json)
         }
     }
 
