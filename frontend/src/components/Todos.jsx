@@ -1,9 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import { MdOutlineDownloadDone } from "react-icons/md";
 import TodosContext from '../context/TodosContext';
 
 function Todos({ todo }) {
+
+    const p = useRef("");
 
     const { dispatch } = useContext(TodosContext);
 
@@ -23,14 +25,18 @@ function Todos({ todo }) {
         }
     }
 
+    const handleDone = () => {
+        p.current.classList.toggle("line")
+    }
+
     return (
         <div className='todo-container'>
             <div className='todos'>
-                <p>{ todo.todo }</p>
+                <p ref={p}>{todo.todo}</p>
                 <div>
-                    <AiFillEdit size={25} cursor="pointer" />
-                    <AiFillDelete onClick={deleteTodo} size={25} cursor="pointer" />
-                    <MdOutlineDownloadDone size={25} cursor="pointer" />
+                    <AiFillEdit size={25} cursor="pointer" title='Edit' />
+                    <AiFillDelete onClick={deleteTodo} size={25} cursor="pointer" title='Delete' />
+                    <MdOutlineDownloadDone onClick={handleDone} size={25} cursor="pointer" title='Done' />
                 </div>
             </div>
             <span>{todo.createdAt}</span>

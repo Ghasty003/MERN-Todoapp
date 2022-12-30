@@ -77,6 +77,14 @@
         display: flex;
         justify-content: space-between;
 
+        p {
+            font-size: 20px;
+
+            &.line {
+                text-decoration: line-through blue;
+            }
+        }
+
         > div {
             display: flex;
             align-items: center;
