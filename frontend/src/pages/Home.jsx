@@ -14,13 +14,12 @@ function Home() {
             const response = await fetch("http://localhost:4000/api/todos");
             const json = await response.json();
 
-            console.log(json)
             dispatch({type: "FETCH_TODOS", payload: json});
         }
 
-
         fetchTodos();
-    }, []);
+        
+    }, [dispatch]);
 
     return (
         <div className='home'>
