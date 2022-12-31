@@ -30,6 +30,7 @@ function Home() {
     const handleClick = () => {
         localStorage.removeItem("user");
         Authdispatch({type: "LOGOUT"});
+        dispatch({type: "FETCH_TODOS"})
     }
 
     return (

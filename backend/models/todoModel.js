@@ -8,6 +8,11 @@ const todoSchema = new Schema(
       type: String,
       required: true,
     },
+
+    uid: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );
