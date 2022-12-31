@@ -1,5 +1,5 @@
 import React, { useContext, useRef, useState } from 'react';
-import { AiFillEdit, AiFillDelete } from "react-icons/ai";
+// import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import { MdOutlineDownloadDone } from "react-icons/md";
 import AuthContext from '../context/AuthContext';
 import TodosContext from '../context/TodosContext';
@@ -91,8 +91,10 @@ function Todos({ todo:t }) {
                 <div className='todos'>
                     <p ref={p}>{t.todo}</p>
                     <div>
-                        <AiFillEdit size={25} cursor="pointer" title='Edit' onClick={editTodo} />
-                        <AiFillDelete onClick={deleteTodo} size={25} cursor="pointer" title='Delete' />
+                        {/* <AiFillEdit size={25} cursor="pointer" title='Edit' onClick={editTodo} /> */}
+                        {/* <AiFillDelete onClick={deleteTodo} size={25} cursor="pointer" title='Delete' /> */}
+                        <p onClick={editTodo}>E</p>
+                        <p onClick={deleteTodo}>D</p>
                         <MdOutlineDownloadDone onClick={handleDone} size={25} cursor="pointer" title='Done' />
                     </div>
                 </div>
