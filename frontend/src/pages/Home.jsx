@@ -2,11 +2,13 @@ import React, { useEffect } from 'react';
 import { useContext } from 'react';
 import Input from '../components/Input';
 import Todos from '../components/Todos';
+import AuthContext from '../context/AuthContext';
 import TodosContext from '../context/TodosContext';
 
 function Home() {
 
     const {todos, dispatch} = useContext(TodosContext);
+    const { dispatch: Authdispatch, user } = useContext(AuthContext);
 
     useEffect(() => {
 
@@ -21,8 +23,17 @@ function Home() {
         
     }, [dispatch]);
 
+    const handleClick = () => {
+        localStorage.removeItem("user");
+        Authdispatch({type: "LOGOUT"});
+    }
+
     return (
         <div className='home'>
+            <div>
+                <p>Welcome, <span>{ user.userName }</span>.</p>
+                <button onClick={handleClick}>Logout</button>
+            </div>
             <h2>Todo app</h2>
             <Input />
             {
