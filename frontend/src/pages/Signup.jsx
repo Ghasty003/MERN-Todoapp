@@ -1,12 +1,39 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
+import AuthContext from "../context/AuthContext";
 
 const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [userName, setUserName] = useState("");
 
+  const [error, setError] = useState("");
+
+  const { dispatch } = useContext(AuthContext);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const response = await fetch("http://localhost:4000/api/users/signup", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({email, password, userName})
+    });
+
+    const json = await response.json();
+
+    if (!response.ok) {
+        console.log(json.error);
+        setError(json.error);
+    }
+
+    if (response.ok) {
+        console.log(json);
+        dispatch({type: "LOGIN", payload: json});
+
+        localStorage.setItem("user", JSON.stringify(json));
+    }
   }
 
   return (
@@ -45,6 +72,7 @@ const Signup = () => {
       </div>
 
       <button>Sign up</button>
+      {error && <div>{error}</div>}
     </form>
   )
 }
