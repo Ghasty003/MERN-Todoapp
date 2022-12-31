@@ -1,6 +1,7 @@
 import React, { useContext, useRef, useState } from 'react';
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import { MdOutlineDownloadDone } from "react-icons/md";
+import AuthContext from '../context/AuthContext';
 import TodosContext from '../context/TodosContext';
 
 function Todos({ todo:t }) {
@@ -13,9 +14,14 @@ function Todos({ todo:t }) {
 
     const { dispatch } = useContext(TodosContext);
 
+    const { user } = useContext(AuthContext);
+
     const deleteTodo = async () => {
         const response = await fetch("http://localhost:4000/api/todos/"+ t._id, {
             method: "DELETE",
+            headers: {
+                "Authorization": `Bearer ${user.token}`
+            }
         });
 
         const json = await response.json();
@@ -34,7 +40,11 @@ function Todos({ todo:t }) {
     }
 
     const editTodo = async () => {
-       const response = await fetch("http://localhost:4000/api/todos/"+ t._id);
+       const response = await fetch("http://localhost:4000/api/todos/"+ t._id, {
+        headers: {
+            "Authorization": `Bearer ${user.token}`
+        }
+       });
        const json = await response.json();
 
        if (!response.ok) {

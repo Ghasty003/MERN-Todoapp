@@ -1,4 +1,5 @@
 import React, { useContext, useRef, useState } from 'react';
+import AuthContext from '../context/AuthContext';
 import TodosContext from '../context/TodosContext';
 
 function Input() {
@@ -8,13 +9,16 @@ function Input() {
 
     const {dispatch} = useContext(TodosContext);
 
+    const { user } = useContext(AuthContext);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const response = await fetch("http://localhost:4000/api/todos", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${user.token}`
             },
             body: JSON.stringify({todo})
         });
