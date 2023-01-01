@@ -64,7 +64,8 @@ function Todos({ todo:t }) {
         const response = await fetch("https://mern-appl-wyiu.onrender.com/api/todos/" + t._id, {
             method: "PATCH",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${user.token}`
             },
             body: JSON.stringify({todo})
         });
