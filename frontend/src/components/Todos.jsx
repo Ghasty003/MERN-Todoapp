@@ -1,6 +1,6 @@
 import React, { useContext, useRef, useState } from 'react';
-// import { AiFillEdit, AiFillDelete } from "react-icons/ai";
-// import { MdOutlineDownloadDone } from "react-icons/md";
+import { AiFillEdit, AiFillDelete } from "react-icons/ai";
+import { MdOutlineDownloadDone } from "react-icons/md";
 import AuthContext from '../context/AuthContext';
 import TodosContext from '../context/TodosContext';
 
@@ -17,7 +17,7 @@ function Todos({ todo:t }) {
     const { user } = useContext(AuthContext);
 
     const deleteTodo = async () => {
-        const response = await fetch("http://localhost:4000/api/todos/"+ t._id, {
+        const response = await fetch("https://mern-appl-wyiu.onrender.com/api/todos"+ t._id, {
             method: "DELETE",
             headers: {
                 "Authorization": `Bearer ${user.token}`
@@ -40,7 +40,7 @@ function Todos({ todo:t }) {
     }
 
     const editTodo = async () => {
-       const response = await fetch("http://localhost:4000/api/todos/"+ t._id, {
+       const response = await fetch("https://mern-appl-wyiu.onrender.com/"+ t._id, {
         headers: {
             "Authorization": `Bearer ${user.token}`
         }
@@ -61,7 +61,7 @@ function Todos({ todo:t }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const response = await fetch("http://localhost:4000/api/todos/" + t._id, {
+        const response = await fetch("https://mern-appl-wyiu.onrender.com/" + t._id, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json"
@@ -91,12 +91,9 @@ function Todos({ todo:t }) {
                 <div className='todos'>
                     <p ref={p}>{t.todo}</p>
                     <div>
-                        {/* <AiFillEdit size={25} cursor="pointer" title='Edit' onClick={editTodo} /> */}
-                        {/* <AiFillDelete onClick={deleteTodo} size={25} cursor="pointer" title='Delete' /> */}
-                        <p onClick={editTodo}>E</p>
-                        <p onClick={deleteTodo}>D</p>
-                        <p onClick={handleDone}>Done</p>
-                        {/* <MdOutlineDownloadDone onClick={handleDone} size={25} cursor="pointer" title='Done' /> */}
+                        <AiFillEdit size={25} cursor="pointer" title='Edit' onClick={editTodo} />
+                        <AiFillDelete onClick={deleteTodo} size={25} cursor="pointer" title='Delete' />
+                        <MdOutlineDownloadDone onClick={handleDone} size={25} cursor="pointer" title='Done' />
                     </div>
                 </div>
                 <span>{t.createdAt}</span>
